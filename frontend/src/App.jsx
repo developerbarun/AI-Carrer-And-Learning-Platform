@@ -1,26 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import Header from './components/Header';
+import React, { useState } from "react";
+import Login from "./components/Login";
+import Profile from "./components/Profile";
+// import Register from "./components/Register";
 
 const App = () => {
-  const [profile, setProfile] = useState(null);
-
-  useEffect(() => {
-    fetch('http://localhost:3000/api/profile')
-      .then(response => response.json())
-      .then(data => setProfile(data));
-  }, []);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
     <div>
-      <Header/>
-      {profile ? (
-        <div>
-          <h2>{profile.name}</h2>
-          <p>Skills: {profile.skills.join(', ')}</p>
-        </div>
-      ) : (
-        <p>Loading...</p>
-      )}
+      {isLoggedIn ? <Profile /> : <Login onLogin={() => setIsLoggedIn(true)} />}
     </div>
   );
 };
