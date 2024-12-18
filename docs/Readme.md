@@ -6,8 +6,23 @@ The backend is built using Node.js, Express, and MongoDB. It handles user authen
 
 ## Folder Structure
 
-backend/ ├── models/ │ ├── User.js│ ├── Skill.js│ ├── Course.js│ └── Job.js├── routes/ │ ├── userRoutes.js│ ├── skillRoutes.js│ ├── courseRoutes.js│ └── jobRoutes.js├── middleware/ │ └── auth.js├── config/ │ └── db.js├── server.js└── .env
-
+backend/
+├── models/
+│   ├── User.js
+│   ├── Skill.js
+│   ├── Course.js
+│   └── Job.js
+├── routes/
+│   ├── userRoutes.js
+│   ├── skillRoutes.js
+│   ├── courseRoutes.js
+│   └── jobRoutes.js
+├── middleware/
+│   └── auth.js
+├── config/
+│   └── db.js
+├── server.js
+└── .env
 
 ## API Endpoints
 
