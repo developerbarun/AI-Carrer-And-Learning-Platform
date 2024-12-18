@@ -1,21 +1,41 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
+const { body, validationResult } = require("express-validator");
 const User = require("../models/User");
 const protect = require("../middleware/auth");
 const router = express.Router();
 
-// Register a new user
-// router.post("/register", async (req, res) => {
-//   const { name, email, password } = req.body;
-//   try {
-//     const user = await User.create({ name, email, password });
-//     res.status(201).json({ message: "User created successfully" });
-//   } catch (err) {
-//     res.status(400).json({ message: "Error creating user" });
-//   }
-// });
+// Validation rules
+const registerValidationRules = [
+  body("name")
+    .notEmpty()
+    .withMessage("Name is required")
+    .isLength({ min: 3 })
+    .withMessage("Name must be at least 3 characters long"),
+  body("email")
+    .isEmail()
+    .withMessage("Enter a valid email address"),
+  body("password")
+    .isLength({ min: 8 })
+    .withMessage("Password must be at least 8 characters long")
+    .matches(/[A-Z]/)
+    .withMessage("Password must contain at least one uppercase letter")
+    .matches(/[a-z]/)
+    .withMessage("Password must contain at least one lowercase letter")
+    .matches(/\d/)
+    .withMessage("Password must contain at least one number")
+    .matches(/[@$!%*?&]/)
+    .withMessage("Password must contain at least one special character")
+];
 
-router.post("/register", async (req, res) => {
+// Register a new user
+router.post("/register", registerValidationRules, async (req, res) => {
+  // Check for validation errors
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
   const { name, email, password } = req.body;
 
   try {
@@ -28,12 +48,14 @@ router.post("/register", async (req, res) => {
     // Create new user
     const user = new User({ name, email, password });
     await user.save();
-    res.status(201).json({ message: "User registered successfully" });
+
+    // Automatically log the user in after registration
+    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: "1h" });
+    res.status(201).json({ token, message: "User registered successfully" });
   } catch (err) {
     res.status(500).json({ message: "Server error" });
   }
 });
-
 
 // Login user
 router.post("/login", async (req, res) => {

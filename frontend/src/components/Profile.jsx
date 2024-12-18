@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Header from './/Header';
 
-const Profile = () => {
+const Profile = ({ onLogout }) => {
   const [profile, setProfile] = useState(null);
 
   useEffect(() => {
@@ -22,13 +23,20 @@ const Profile = () => {
     fetchProfile();
   }, []);
 
-  return profile ? (
-    <div>
-      <h2>{profile.name}</h2>
-      <p>{profile.email}</p>
+  return (
+    <>
+      <Header/>
+    <div className="p-8 text-center">
+
+      <h1 className="text-3xl font-bold">Welcome to Your Profile</h1>
+      <button
+        onClick={onLogout}
+        className="mt-4 bg-red-500 text-white px-6 py-2 rounded-md hover:bg-red-600"
+      >
+        Log Out
+      </button>
     </div>
-  ) : (
-    <p>Loading...</p>
+    </>
   );
 };
 
