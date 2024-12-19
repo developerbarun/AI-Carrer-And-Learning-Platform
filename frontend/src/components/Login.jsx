@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const Login = ({ onLogin, onNavigateToSignup }) => {
+const Login = ({ onLogin }) => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -67,7 +69,7 @@ const Login = ({ onLogin, onNavigateToSignup }) => {
         <div className="mt-6 text-center">
           <p className="text-sm text-gray-600">Don't have an account?</p>
           <button
-            onClick={onNavigateToSignup}
+            onClick={() => navigate("/register")}
             className="mt-2 text-purple-600 font-semibold hover:underline"
           >
             Create an Account
