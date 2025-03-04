@@ -1,72 +1,28 @@
-import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import Login from "./components/Login";
-import Profile from "./components/Profile";
-import Register from "./components/Register";
-import SkillCard from "./components/SkillCard";
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Navbar from './Navbar';
+import ProfileSetup from './ProfileSetup';
+import CourseRecommendations from './CourseRecommendations';
+import AnalyticsDashboard from './AnalyticsDashboard';
+import JobOpportunities from './JobOpportunities';
 
-const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      setIsLoggedIn(true);
-    }
-  }, []);
-
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    setIsLoggedIn(false);
-  };
-
+function App() {
   return (
     <Router>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            isLoggedIn ? (
-              <Navigate to="/profile" />
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
-        />
-        <Route
-          path="/login"
-          element={
-            isLoggedIn ? (
-              <Navigate to="/profile" />
-            ) : (
-              <Login onLogin={() => setIsLoggedIn(true)} />
-            )
-          }
-        />
-        <Route
-          path="/register"
-          element={
-            isLoggedIn ? (
-              <Navigate to="/profile" />
-            ) : (
-              <Register onSignupComplete={() => setIsLoggedIn(true)} />
-            )
-          }
-        />
-        <Route
-          path="/profile"
-          element={
-            isLoggedIn ? (
-              <Profile onLogout={handleLogout} />
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
-        />
-        <Route path="/skills" element={<SkillCard />} />
-      </Routes>
+      <div className="App">
+        <Navbar />
+        <main className="p-4">
+          <Routes>
+            <Route path="/" element={<h1>Welcome to AI Career Platform</h1>} />
+            <Route path="/profile" element={<ProfileSetup />} />
+            <Route path="/courses" element={<CourseRecommendations />} />
+            <Route path="/analytics" element={<AnalyticsDashboard />} />
+            <Route path="/jobs" element={<JobOpportunities />} />
+          </Routes>
+        </main>
+      </div>
     </Router>
   );
-};
+}
 
 export default App;

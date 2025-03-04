@@ -9,19 +9,16 @@ const courseRoutes = require('./routes/courses');
 const jobRoutes = require('./routes/jobs');
 const authRoutes = require("./routes/authRoutes");
 
-
-
 const app = express();
 app.use(cors());
 app.use(express.json());
-
 connectDB();
-PORT = process.env.PORT || 5000;
+PORT = process.env.PORT || 3000;
 
-app.use('/api/skills',skillRoutes);
-app.use('/api/courses',courseRoutes);
-app.use('/api/jobs',jobRoutes);
-app.use("/api/users", authRoutes);
+app.use('/api/v1/skills',skillRoutes);
+app.use('/api/v1/courses',courseRoutes);
+app.use('/api/v1/jobs',jobRoutes);
+app.use("/api/v1/users", authRoutes);
 
 app.listen(PORT,() => {
     console.log(`Port is up on ${PORT}`);

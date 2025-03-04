@@ -48,8 +48,6 @@ router.post("/register", registerValidationRules, async (req, res) => {
     // Create new user
     const user = new User({ name, email, password });
     await user.save();
-
-    // Automatically log the user in after registration
     const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: "1h" });
     res.status(201).json({ token, message: "User registered successfully" });
   } catch (err) {
