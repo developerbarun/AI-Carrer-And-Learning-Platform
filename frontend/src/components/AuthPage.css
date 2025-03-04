@@ -1,0 +1,132 @@
+/* Global styles for light & dark mode */
+:root {
+    --bg-light: #f9f9f9;
+    --text-light: #333;
+    --bg-dark: #0d0d0d;
+    --text-dark: #e0e0e0;
+    --primary: #8a5cf6;
+    --primary-hover: #7045c5;
+    --border-color: rgba(255, 255, 255, 0.1);
+    --input-bg: rgba(255, 255, 255, 0.1);
+  }
+  
+  /* Apply theme globally */
+  body {
+    transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+  }
+  
+  .light {
+    background: var(--bg-light);
+    color: var(--text-light);
+  }
+  
+  .dark {
+    background: var(--bg-dark);
+    color: var(--text-dark);
+  }
+  
+
+:root {
+    --bg-light: #f9f9f9;
+    --text-light: #333;
+    --bg-dark: #0d0d0d;
+    --text-dark: #e0e0e0;
+    --primary: #8a5cf6;
+    --primary-hover: #7045c5;
+    --border-color: rgba(255, 255, 255, 0.1);
+    --input-bg: rgba(255, 255, 255, 0.1);
+  }
+  
+  .auth-container {
+    width: 100%;
+    max-width: 420px;
+    margin: 80px auto;
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+    backdrop-filter: blur(12px);
+  }
+  
+  /* Light Theme */
+  .light .auth-container {
+    background: var(--bg-light);
+    color: var(--text-light);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Dark Theme */
+  .dark .auth-container {
+    background: var(--bg-dark);
+    color: var(--text-dark);
+    box-shadow: 0 6px 18px rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+  }
+  
+  .auth-title {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+  
+  .auth-container input {
+    width: 100%;
+    padding: 12px;
+    margin: 12px 0;
+    background: var(--input-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 16px;
+    color: white;
+    outline: none;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .auth-container input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+  }
+  
+  .auth-container input:focus {
+    border-color: var(--primary);
+  }
+  
+  .auth-container button {
+    width: 100%;
+    padding: 12px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .auth-container button:hover {
+    background: var(--primary-hover);
+  }
+  
+  .auth-container .error {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+  }
+  
+  .auth-container .switch-auth {
+    margin-top: 15px;
+    font-size: 14px;
+  }
+  
+  .auth-container .switch-auth a {
+    color: var(--primary);
+    cursor: pointer;
+    text-decoration: none;
+    transition: 0.3s;
+  }
+  
+  .auth-container .switch-auth a:hover {
+    text-decoration: underline;
+  }
+  
